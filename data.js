@@ -38,7 +38,7 @@ function getDataRender(data) {
     if (data.length === 0) {
         productlist.innerHTML = `
             <div class="col-span-full text-center py-10">
-                <h2 class="text-xl font-semibold text-gray-500">Üzr istəyirik, bu kateqoriyada məhsul tapılmadı! 😕</h2>
+                <h2 class="text-xl font-semibold text-gray-500">Üzr istəyirik, bu kateqoriyada məhsul tapılmadı!</h2>
             </div>`;
         return; 
     }
