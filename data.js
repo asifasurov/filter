@@ -1,6 +1,7 @@
 const productlist = document.getElementById("productlist")
 const categorylist = document.getElementById("categorylist")
 const searchinput = document.getElementById("searchinput")
+const searhclist = document.getElementById("searhclist")
 let data = []
 
 // function getProduct(){
@@ -57,6 +58,24 @@ function getDataRender(data) {
             </div>
     `).join("");
 }
+function searhclistData(data) {
+    searhclist.innerHTML = data.map(s => `<div onclick="detailData('${s.id}')" class="grid sm:grid-cols-3 cursor-pointer my-3 hover:shadow-2xl items-center border gap-4">
+                        <div class="sm:col-span-2 flex sm:items-center max-sm:flex-col gap-6">
+                            <div class="w-24 h-24 shrink-0 bg-white p-2 rounded-md">
+                                <img src="${s.image}" class="w-full h-full object-contain">
+                            </div>
+                            <div>
+                                <h4 class="text-[15px] font-semibold text-slate-900">${s.title}</h4>
+                                <h6 class="text-xs font-medium text-red-500 cursor-pointer mt-1">Remove</h6>
+                                <div class="flex gap-4 mt-4">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:ml-auto">
+                            <h4 class="text-[15px] font-semibold text-slate-900">${s.price} $</h4>
+                        </div>
+                  </div>`).join("")
+}
 
 
 function selectCat(name) {
@@ -70,13 +89,21 @@ function selectCat(name) {
 searchinput.addEventListener('input', (e) =>{
   // console.log(e.target.value);
   searchData(e.target.value)
+  e.target.value == "" ? searhclist.style.display = 'none' : searhclist.style.display = 'block' 
   
 })
 
 function searchData(searchinput){
   const key = searchinput.toLowerCase()
-  const filtr = data.filter(item => item.title.toLowerCase().includes(key))
+  const filtr = data.filter(item => item.title.toLowerCase().startsWith(key))
   getDataRender(filtr)
+  searhclistData(filtr)
+}
+
+function detailData(id) {
+    window.location.href = `detail.htm?id=${id}`
+    
+
 }
 
 
